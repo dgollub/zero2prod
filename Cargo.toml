@@ -1,0 +1,15 @@
+[package]
+name = "zero2prod"
+version = "0.1.0"
+edition = "2021"
+authors = ["Daniel Kurashige-Gollub <daniel@kurashige-gollub.de>"]
+license = "MIT"
+description = "Zero To Production In Rust: https://www.zero2prod.com/"
+repository = "https://github.com/dgollub/zero0prod/"
+# NOTE(dkg): it'll probably work with older versions as well, but this is what I have right now
+rust-version = "1.69"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
