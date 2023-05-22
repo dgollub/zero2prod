@@ -10,10 +10,31 @@ This is my implementation of the project from [Zero To Production In Rust](https
 * `rustup add component clippy` : linter
 * `rustup add component rustfmt` : code formatting
 
+Depending on your environment you will also need to install this
+
+## Windows
+
+* `cargo install -f cargo-binutils`
+* `rustup component add llvm-tools-preview`
+
+## Linux
+
+* Ubuntu: `sudo apt-get install lld clang`
+* Arch: `sudo pacman -S lld clang`
+
+## macOS
+
+* brew install michaeleisel/zld/zld, optional, needs XCode and needs to be enabled in .cargo/config.toml
 
 # Build instructions
 
 * `cargo watch -x check -x test -x run`
+
+
+# Difference to the book
+
+* [axum](https://github.com/tokio-rs/axum) instead of [actix-web](https://actix.rs/)
+* `/healthcheck` endpoint instead of `/health_check`
 
 # Copyright
 
