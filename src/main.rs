@@ -4,46 +4,19 @@
 //! cargo run
 //! ```
 
-use axum::{response::Html, routing::get, Router};
-use std::{net::SocketAddr, str::FromStr};
-
-mod constants;
-use constants::*;
+use zero2prod::create_server;
 
 #[tokio::main]
-async fn main() {
-    let addr_str = format!(
-        "{}:{}",
-        DEFAULT_SERVICE_LISTEN_INTERFACE, DEFAULT_SERVICE_LISTEN_PORT
-    );
-    let addr = SocketAddr::from_str(&addr_str)
-        .expect(&format!("Could not create listening address: {}", addr_str));
+async fn main() -> Result<(), hyper::Error> {
+    let app = create_server()?;
 
-    println!("listening on {:?}", addr_str);
-
-    axum::Server::bind(&addr)
-        .serve(app().into_make_service())
-        .await
-        .unwrap();
-}
-
-fn app() -> Router {
-    Router::new()
-        .route("/", get(index_handler))
-        .route("/healthcheck", get(healthcheck_handler))
-}
-
-async fn index_handler() -> Html<&'static str> {
-    Html("<h1>Hello, World!</h1>")
-}
-
-async fn healthcheck_handler() -> &'static str {
-    "ok"
+    app.await
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use zero2prod::create_router;
+
     use axum::{
         body::Body,
         http::{Request, StatusCode},
@@ -53,7 +26,7 @@ mod tests {
 
     #[tokio::test]
     async fn index_handler_test() {
-        let app = app();
+        let app = create_router();
 
         // `Router` implements `tower::Service<Request<Body>>` so we can
         // call it like any tower service, no need to run an HTTP server.
@@ -71,7 +44,7 @@ mod tests {
 
     #[tokio::test]
     async fn healthcheck_handler_test() {
-        let app = app();
+        let app = create_router();
 
         // `Router` implements `tower::Service<Request<Body>>` so we can
         // call it like any tower service, no need to run an HTTP server.
