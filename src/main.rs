@@ -3,12 +3,22 @@
 //! ```not_rust
 //! cargo run
 //! ```
+use std::net::TcpListener;
 
 use zero2prod::create_server;
 
+mod constants;
+use constants::*;
+
 #[tokio::main]
 async fn main() -> Result<(), hyper::Error> {
-    let app = create_server()?;
+    let addr_str = format!(
+        "{}:{}",
+        DEFAULT_SERVICE_LISTEN_INTERFACE, DEFAULT_SERVICE_LISTEN_PORT
+    );
+    let listener = TcpListener::bind(addr_str).expect("Could not create tcp listener");
+
+    let app = create_server(listener)?;
 
     app.await
 }
