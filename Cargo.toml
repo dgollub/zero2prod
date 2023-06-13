@@ -25,6 +25,7 @@ tokio = { version = "1.0", features = ["full"] }
 hyper = { version = "0.14", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1"
+sea-orm = { version = "0.11", features = [ "sqlx-postgres", "runtime-tokio-rustls", "macros", "with-chrono", "with-uuid" ] }
 
 [dev-dependencies]
 tower = { version = "0.4", features = ["util"] }

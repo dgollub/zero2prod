@@ -7,6 +7,7 @@ This is my implementation of the project from [Zero To Production In Rust](https
 * `cargo install cargo-watch` : automatic rebuilds on changes
 * `cargo install cargo-audit` : dependencies audit
 * `cargo install tarpaulin` : code coverage
+* `cargo install sea-orm-cli` : SeaORM CLI
 * `rustup add component clippy` : linter
 * `rustup add component rustfmt` : code formatting
 
@@ -40,6 +41,7 @@ Depending on your environment you will also need to install this
 
 * [axum](https://github.com/tokio-rs/axum) instead of [actix-web](https://actix.rs/)
 * `/healthcheck` endpoint instead of `/health_check`
+* Use [SeaORM](https://github.com/SeaQL/sea-orm) instead of [sqlx](https://github.com/launchbadge/sqlx)
 
 # Copyright
 
